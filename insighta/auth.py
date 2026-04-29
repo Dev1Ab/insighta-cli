@@ -1,3 +1,5 @@
+import os
+
 import click
 import webbrowser
 import secrets
@@ -9,7 +11,7 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 from .config import load_tokens, save_tokens, clear_tokens
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:8000")
 
 
 @click.command()
@@ -23,7 +25,7 @@ def login():
 
     state = f"cli:{secrets.token_urlsafe(32)}"
 
-    redirect_uri = "http://localhost:8765/callback"
+    redirect_uri = os.getenv("REDIRECT_URI", "http://localhost:8765/callback")
 
     auth_url = f"{BASE_URL}/auth/github?state={state}&code_challenge={code_challenge}"
 
