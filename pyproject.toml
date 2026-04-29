@@ -1,0 +1,7 @@
+[project]
+name = "insighta"
+version = "0.1.0"
+dependencies = ["click", "requests", "rich"]
+
+[project.scripts]
+insighta = "insighta.cli:cli"
